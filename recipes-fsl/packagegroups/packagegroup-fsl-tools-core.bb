@@ -24,6 +24,7 @@ RDEPENDS_${PN} = " \
     elfutils \
     file \
     gptfdisk \
+    util-linux  \
     i2c-tools \
     ifenslave \
     kmod \
@@ -44,6 +45,8 @@ RDEPENDS_${PN} = " \
     sysfsutils \
     sysklogd \
     sysstat \
+    evtest \
+    e2fsprogs-resize2fs \
 "
 EXTRA_PKGS_COMMUNITY = " \
     devmem2 \

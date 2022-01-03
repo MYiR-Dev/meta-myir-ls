@@ -30,6 +30,8 @@ BOOT_TYPE_ls1012ardb ?= "qspi"
 BOOT_TYPE_ls1012afrwy ?= "qspi"
 BOOT_TYPE_ls1021atwr ?= "nor sd"
 BOOT_TYPE_ls1028ardb ?= "xspi sd"
+BOOT_TYPE_mydjls1028 ?= "xspi sd"
+
 
 IMA_EVM = "${@bb.utils.contains('DISTRO_FEATURES', 'ima-evm', 'true', 'false', d)}"
 ENCAP = "${@bb.utils.contains('DISTRO_FEATURES', 'encap', 'true', 'false', d)}"

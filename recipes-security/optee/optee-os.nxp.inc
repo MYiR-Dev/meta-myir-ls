@@ -9,9 +9,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c1f21c4f72f372ef38a5a4aee55ec173"
 inherit deploy python3native autotools
 DEPENDS = "python3-pycryptodome-native python3-pyelftools-native python3-pycryptodomex-native dtc-native"
 
-OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/qoriq/qoriq-components/optee_os"
-SRC_URI = "${OPTEE_OS_SRC};nobranch=1"
-SRCREV = "87956c343f6a1a24dfe57e7d5c77dfc10b45148c"
+#OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/qoriq/qoriq-components/optee_os"
+OPTEE_OS_SRC ?= "git:///home/wujl/yocto_sdk/bsp/optee-os;protocol=file"
+#SRC_URI = "${OPTEE_OS_SRC};nobranch=1"
+SRC_URI = "${OPTEE_OS_SRC};branch=develop"
+SRCREV = "92eb637e3586a0023a63f29bb1754e9efb20808a"
+#SRCREV = "87956c343f6a1a24dfe57e7d5c77dfc10b45148c"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build.${PLATFORM_FLAVOR}"

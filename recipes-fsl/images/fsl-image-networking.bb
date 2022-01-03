@@ -20,5 +20,9 @@ IMAGE_INSTALL_append = " \
     packagegroup-fsl-tools-core \
     packagegroup-fsl-benchmark-core \
     packagegroup-fsl-networking-core \
+    packagegroup-fsl-tools-audio     \
+    quectel-cm                     \
+    proftpd                        \
+    v4l-utils                      \
 "
 

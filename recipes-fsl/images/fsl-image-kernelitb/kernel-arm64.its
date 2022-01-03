@@ -63,6 +63,14 @@
 			fdt = "fdt-dtb";
 		};
 
+     	  	mydjls1028 {
+                        description = "config for mydjls1028";
+                        kernel = "kernel";
+                        ramdisk = "initrd";
+                        fdt = "fdt-dtb";
+                };
+
+
 		ls1028aqds {
 			description = "config for ls1028aqds";
 			kernel = "kernel";
