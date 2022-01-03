@@ -131,6 +131,12 @@ WKS_FILE_ls1046a ?= "qoriq-ls104xa.wks.in"
 # ls1028a
 QE_DP_FILE_ls1028a ?= "dp/ls1028a-dp-fw.bin"
 
+# ls1028a
+QE_DP_FILE_mydjls1028 ?= "dp/ls1028a-dp-fw.bin"
+WKS_FILE_mydjls1028 ?= "qoriq-ls1028a.wks.in"
+
+
+
 WKS_FILE_ls1028a ?= "qoriq-ls1028a.wks.in"
 
 # ls102xa

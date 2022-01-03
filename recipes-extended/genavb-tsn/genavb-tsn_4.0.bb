@@ -33,10 +33,13 @@ INITSCRIPT_PARAMS = "defaults"
 GENAVB_TSN_CONFIG ?= "endpoint_tsn"
 GENAVB_TSN_CONFIG_imx8mpevk = "endpoint_tsn"
 GENAVB_TSN_CONFIG_ls1028ardb = "bridge"
+GENAVB_TSN_CONFIG_mydjls1028 = "bridge"
+
 
 GENAVB_TSN_TARGET ?= "linux_imx8"
 GENAVB_TSN_TARGET_imx8mpevk = "linux_imx8"
 GENAVB_TSN_TARGET_ls1028ardb = "linux_ls1028"
+GENAVB_TSN_TARGET_mydjls1028 = "linux_ls1028"
 
 SYSTEMD_SERVICE_${PN} = "genavb-tsn.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"

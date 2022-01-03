@@ -2,6 +2,7 @@
 DELTA_KERNEL_DEFCONFIG_append_ls1043ardb = " linux-baremetal-ls104xa.config"
 DELTA_KERNEL_DEFCONFIG_append_ls1046ardb = " linux-baremetal-ls104xa.config"
 DELTA_KERNEL_DEFCONFIG_append_ls1028ardb = " linux-baremetal-ls1028a.config"
+DELTA_KERNEL_DEFCONFIG_append_mydjls1028 = " linux-baremetal-ls1028a.config"
 DELTA_KERNEL_DEFCONFIG_append_lx2160a    = " linux-baremetal-lx2160a.config"
 DELTA_KERNEL_DEFCONFIG_append_ls1021aiot = " linux-baremetal-ls1021a.config"
 
@@ -10,12 +11,15 @@ KERNEL_DEVICETREE_append_ls1021aiot = " ls1021a-iot-bm.dtb"
 KERNEL_DEVICETREE_append_ls1043ardb = " freescale/fsl-ls1043a-rdb-sdk-bm.dtb"
 KERNEL_DEVICETREE_append_ls1046ardb = " freescale/fsl-ls1046a-rdb-sdk-bm.dtb"
 KERNEL_DEVICETREE_append_ls1028ardb = " freescale/fsl-ls1028a-rdb-sdk-bm.dtb"
+KERNEL_DEVICETREE_append_mydjls1028 = " freescale/fsl-ls1028a-rdb-sdk-bm.dtb"
+
 
 # uboot env
 UBOOT_BOOT_BAREMETAL_DEFCONFIG_ls1021aiot ?= "ls1021aiot_baremetal_defconfig"
 UBOOT_BOOT_BAREMETAL_DEFCONFIG_ls1043ardb ?= "ls1043ardb_tfa_baremetal_defconfig"
 UBOOT_BOOT_BAREMETAL_DEFCONFIG_ls1046ardb ?= "ls1046ardb_tfa_baremetal_defconfig"
 UBOOT_BOOT_BAREMETAL_DEFCONFIG_ls1028ardb ?= "ls1028ardb_tfa_baremetal_defconfig"
+UBOOT_BOOT_BAREMETAL_DEFCONFIG_mydjls1028 ?= "mydjls1028_tfa_baremetal_defconfig"
 UBOOT_BOOT_BAREMETAL_DEFCONFIG_lx2160ardb ?= "lx2160ardb_tfa_baremetal_defconfig"
 UBOOT_BOOT_BAREMETAL_DEFCONFIG_lx2160ardb-rev2 ?= "lx2160ardb_tfa_baremetal_defconfig"
 
@@ -35,3 +39,7 @@ RCWSD_ls1028ardb = "${@bb.utils.contains('DISTRO_FEATURES', 'sai', \
 UBOOT_BAREMETAL_DEFCONFIG_ls1028ardb =  "${@bb.utils.contains('DISTRO_FEATURES', 'sai', \
                     'ls1028ardb_bm_sai_defconfig', \
                     'ls1028ardb_bm_defconfig', d)}"
+
+RCWSD_mydjls1028 = "${@bb.utils.contains('DISTRO_FEATURES', 'sai', \
+                    'R_SQPP_0x85bb/rcw_1500_gpu600_sai', \
+                    'R_SQPP_0x85bb/rcw_1500_gpu600', d)}"

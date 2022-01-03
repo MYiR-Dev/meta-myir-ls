@@ -115,7 +115,7 @@ qoriq_add_layers()
 	echo "BBLAYERS += \"\${BSPDIR}/sources/meta-cloud-services\"" >> $BUILD_DIR/conf/bblayers.conf
 	echo "BBLAYERS += \"\${BSPDIR}/sources/meta-security\"" >> $BUILD_DIR/conf/bblayers.conf
 
-	echo "BBLAYERS += \"\${BSPDIR}/sources/meta-qoriq\"" >> $BUILD_DIR/conf/bblayers.conf
+	echo "BBLAYERS += \"\${BSPDIR}/sources/meta-myir\"" >> $BUILD_DIR/conf/bblayers.conf
 	echo "BBLAYERS += \"\${BSPDIR}/sources/meta-cpan\"" >> $BUILD_DIR/conf/bblayers.conf
 }
 
@@ -138,7 +138,7 @@ add_layers()
 
 	echo "" >> $BUILD_DIR/conf/bblayers.conf
 	echo "# Real-time Edge Yocto Project Release layers" >> $BUILD_DIR/conf/bblayers.conf
-	echo "BBLAYERS += \"\${BSPDIR}/sources/meta-real-time-edge\"" >> $BUILD_DIR/conf/bblayers.conf
+	echo "BBLAYERS += \"\${BSPDIR}/sources/meta-myir-real-time\"" >> $BUILD_DIR/conf/bblayers.conf
 }
 
 # get command line options

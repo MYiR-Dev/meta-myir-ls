@@ -10,7 +10,7 @@ SUMMARY = "Real-time Edge image to be used for development and evaluation"
 
 LICENSE = "MIT"
 
-export IMAGE_BASENAME = "nxp-image-real-time-edge"
+export IMAGE_BASENAME = "myir-image-real-time-edge"
 
 IMAGE_FSTYPES_qoriq = "${SOC_DEFAULT_IMAGE_FSTYPES}"
 
