@@ -29,6 +29,9 @@ IMAGE_INSTALL_append_ls1028ardb = " \
 IMAGE_INSTALL_append_mydjls1028 = " \
     packagegroup-real-time-edge-multimedia \
 "
+IMAGE_INSTALL_append_mydj1028 = " \
+    packagegroup-real-time-edge-multimedia \
+"
 
 IMAGE_INSTALL_append_imx = " \
     packagegroup-real-time-edge-multimedia \

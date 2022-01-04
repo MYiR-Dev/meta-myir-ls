@@ -15,6 +15,10 @@ SOC_GPU_imxgpu = "libopencl-imx imx-gpu-viv-demos gtk+3-demo \
 SOC_GPU_ls1028ardb = "libopencl-imx imx-gpu-viv-demos gtk+3-demo \
                   packagegroup-fsl-tools-gpu packagegroup-imx-tools-audio"
 
+SOC_GPU_mydj1028 = "libopencl-imx imx-gpu-viv-demos gtk+3-demo \
+                  packagegroup-fsl-tools-gpu packagegroup-imx-tools-audio"
+
+
 RDEPENDS_${PN} = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' weston weston-examples weston-init glmark2','', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'libdrm', 'libdrm', '', d)} \

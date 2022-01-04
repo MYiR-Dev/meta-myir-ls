@@ -14,6 +14,8 @@ SRC_URI_append_ls1028ardb = "file://ls1028ardb_boot.cmd \
                              file://ls1028ardb_baremetal_boot.cmd"
 SRC_URI_append_mydjls1028 = "file://mydjls1028_boot.cmd \
                              file://mydjls1028_baremetal_boot.cmd"
+SRC_URI_append_mydj1028 =   "file://mydj1028_boot.cmd \
+                             file://mydj1028_baremetal_boot.cmd"
 SRC_URI_append_ls1043ardb = "file://ls1043ardb_boot.cmd \
                              file://ls1043ardb_baremetal_boot.cmd"
 SRC_URI_append_ls1046ardb = "file://ls1046ardb_boot.cmd \

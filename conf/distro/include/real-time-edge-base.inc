@@ -12,7 +12,12 @@ DISTRO_FEATURES_append_ls1028ardb = " jailhouse real-time-edge-libbee real-time-
 DISTRO_FEATURES_append_mydjls1028 = " jailhouse real-time-edge-libbee real-time-edge-libblep libnfc-nci \
                                       wayland-protocols weston imx-gpu-viv libdrm kmscube \
                                       real-time-edge-sysrepo tsn-scripts wayland sai systemd opengl"
+DISTRO_FEATURES_append_mydj1028 = " jailhouse real-time-edge-libbee real-time-edge-libblep libnfc-nci \
+                                      wayland-protocols weston imx-gpu-viv libdrm kmscube \
+                                      real-time-edge-sysrepo tsn-scripts wayland sai systemd opengl"
 
+
+VIRTUAL-RUNTIME_init_manager = " systemd"
 DISTRO_FEATURES_append_mx8mp = " jailhouse real-time-edge-sysrepo"
 DISTRO_FEATURES_append_mx8m = " wayland-protocols weston imx-gpu-viv libdrm kmscube"
 DISTRO_FEATURES_append_ls1021atsn = " real-time-edge-sysrepo real-time-edge-nodejs-lbt feedgnuplot tsn-scripts real-time-edge-prl"
@@ -39,6 +44,15 @@ PREFERRED_PROVIDER_virtual/libgles2_mydjls1028  = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/egl_mydjls1028  = "imx-gpu-viv"
 LICENSE_FLAGS_WHITELIST_append_mydjls1028 = " commercial"
 
+DISTRO_FEATURES_remove_mydj1028 = " x11"
+PREFERRED_VERSION_weston_mydj1028 = "9.0.0.imx"
+PREFERRED_VERSION_wayland-protocols_mydj1028 = "1.20.imx"
+PREFERRED_VERSION_libdrm_mydjls1028 = "2.4.102.imx"
+PREFERRED_PROVIDER_virtual/libgl_mydj1028  = "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/libgles1_mydj1028  = "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/libgles2_mydj1028  = "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/egl_mydj1028  = "imx-gpu-viv"
+LICENSE_FLAGS_WHITELIST_append_mydj1028 = " commercial"
 
 DELTA_KERNEL_DEFCONFIG_append = " \
     linux-rt.config \
@@ -59,6 +73,7 @@ KERNEL_DEVICETREE_append_ls1046ardb= " freescale/fsl-ls1046a-rdb-sdk-jailhouse.d
 KERNEL_DEVICETREE_append_ls1046ardb= " freescale/fsl-ls1046a-rdb-sdk-jailhouse-with-dpaa.dtb"
 KERNEL_DEVICETREE_append_ls1028ardb= " freescale/fsl-ls1028a-rdb-jailhouse.dtb"
 KERNEL_DEVICETREE_append_mydjls1028= " freescale/myd-jls1028-jailhouse.dtb"
+KERNEL_DEVICETREE_append_mydj1028= " freescale/myd-jls1028-jailhouse.dtb"
 KERNEL_DEVICETREE_append_imx8mpevk = " freescale/imx8mp-evk-root.dtb"
 
 # opcua override default log level

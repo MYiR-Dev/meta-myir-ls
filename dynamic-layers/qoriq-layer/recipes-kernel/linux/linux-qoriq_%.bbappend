@@ -2,8 +2,8 @@
 #KERNEL_SRC_real-time-edge = "git://github.com/real-time-edge-sw/real-time-edge-linux.git;protocol=https"
 #SRCBRANCH_real-time-edge = "linux_5.10.y"
 #SRCREV_real-time-edge = "baf692faaebd0fc5f085274124128ffdc1b09403"
-KERNEL_SRC_real-time-edge = "git:///home/wujl/yocto_sdk/bsp/linux-5.10.9;protocol=file"
-SRCBRANCH_real-time-edge = "develop"
+KERNEL_SRC_real-time-edge = "git://github.com/MYiR-Dev/myir-ls-linux.git;protocol=https"
+SRCBRANCH_real-time-edge = "linux-edge-5.10.9"
 SRCREV_real-time-edge = "3862aa0a0efe8de150d24e601cd2bf81425b90f0"
 
 
