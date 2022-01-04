@@ -31,7 +31,7 @@ do_install(){
 		install -m 755 ${DEPLOY_DIR_IMAGE}/myd-jls1028-jailhouse.dtb ${D}/home/root/mfgimage/kernel_dtb/myd-jls1028-jailhouse.dtb
 		install -m 755 ${DEPLOY_DIR_IMAGE}/myd-jls1028-dpdk.dtb ${D}/home/root/mfgimage/kernel_dtb/myd-jls1028-dpdk.dtb
 		install -m 755 ${DEPLOY_DIR_IMAGE}/myd-jls1028-qds.dtb ${D}/home/root/mfgimage/kernel_dtb/myd-jls1028-qds.dtb
-		install -m 755 ${DEPLOY_DIR_IMAGE}/mydjls1028_boot.scr ${D}/home/root/mfgimage/kernel_dtb/mydjls1028_boot.scr
+		install -m 755 ${DEPLOY_DIR_IMAGE}/mydj1028_boot.scr ${D}/home/root/mfgimage/kernel_dtb/mydjls1028_boot.scr
 		install -m 755 ${DEPLOY_DIR_IMAGE}/Image ${D}/home/root/mfgimage/kernel_dtb/Image
     
 

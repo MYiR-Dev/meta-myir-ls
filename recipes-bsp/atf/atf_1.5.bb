@@ -13,8 +13,8 @@ S = "${WORKDIR}/git"
 
 #SRC_URI = "git://source.codeaurora.org/external/qoriq/qoriq-components/atf;nobranch=1"
 #SRCREV = "5ae5233c064e94a8bd1b4a1652a03b87b0be63f6"
-SRC_URI = "git:///home/wujl/yocto_sdk/bsp/atf;protocol=file;branch=develop"
-SRCREV = "9e7c17a9979e2f7e2799fc09a03c925675280a1a"
+SRC_URI = "git://github.com/MYiR-Dev/myir-ls-atf.git;protocol=https;branch=atf-edge"
+SRCREV = "e07af5ebcc796eb446a238a518aced62981bda9d"
 
 COMPATIBLE_MACHINE = "(qoriq)"
 

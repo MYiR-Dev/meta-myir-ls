@@ -13,7 +13,7 @@ DEPENDS = "python3-pycryptodome-native python3-pyelftools-native python3-pycrypt
 OPTEE_OS_SRC ?= "git:///home/wujl/yocto_sdk/bsp/optee-os;protocol=file"
 #SRC_URI = "${OPTEE_OS_SRC};nobranch=1"
 SRC_URI = "${OPTEE_OS_SRC};branch=develop"
-SRCREV = "92eb637e3586a0023a63f29bb1754e9efb20808a"
+SRCREV = "4ae725f0089530d49e4a9e84c0e3cd2305b99b32"
 #SRCREV = "87956c343f6a1a24dfe57e7d5c77dfc10b45148c"
 
 S = "${WORKDIR}/git"
