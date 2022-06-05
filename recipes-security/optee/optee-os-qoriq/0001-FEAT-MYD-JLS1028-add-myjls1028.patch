@@ -1,0 +1,70 @@
+From 92eb637e3586a0023a63f29bb1754e9efb20808a Mon Sep 17 00:00:00 2001
+From: wujl <1053924360@qq.com>
+Date: Fri, 24 Dec 2021 10:04:44 +0800
+Subject: [PATCH 1/2] FEAT:MYD-JLS1028:add myjls1028
+
+---
+ core/arch/arm/plat-ls/conf.mk           | 10 ++++++++++
+ core/arch/arm/plat-ls/crypto_conf.mk    |  3 +++
+ core/arch/arm/plat-ls/platform_config.h | 10 ++++++++++
+ 3 files changed, 23 insertions(+)
+
+diff --git a/core/arch/arm/plat-ls/conf.mk b/core/arch/arm/plat-ls/conf.mk
+index 059618d8..f6e1a631 100644
+--- a/core/arch/arm/plat-ls/conf.mk
++++ b/core/arch/arm/plat-ls/conf.mk
+@@ -117,6 +117,16 @@ $(call force,CFG_ARM_GICV3,y)
+ CFG_SHMEM_SIZE ?= 0x00200000
+ endif
+ 
++ifeq ($(PLATFORM_FLAVOR),mydjls1028)
++include core/arch/arm/cpu/cortex-armv8-0.mk
++$(call force,CFG_TEE_CORE_NB_CORE,2)
++$(call force,CFG_DRAM0_SIZE,0x80000000)
++$(call force,CFG_CORE_CLUSTER_SHIFT,1)
++$(call force,CFG_ARM_GICV3,y)
++CFG_SHMEM_SIZE ?= 0x00200000
++endif
++
++
+ ifeq ($(platform-flavor-armv8),1)
+ $(call force,CFG_WITH_ARM_TRUSTED_FW,y)
+ CFG_TZDRAM_START ?= ((CFG_DRAM0_BASE + CFG_DRAM0_SIZE) - CFG_TEE_OS_DRAM0_SIZE)
+diff --git a/core/arch/arm/plat-ls/crypto_conf.mk b/core/arch/arm/plat-ls/crypto_conf.mk
+index 5421db89..e1d5997c 100644
+--- a/core/arch/arm/plat-ls/crypto_conf.mk
++++ b/core/arch/arm/plat-ls/crypto_conf.mk
+@@ -63,6 +63,9 @@ $(call force,CFG_JR_INT,175)  # Default JR IT Number (142 + 32) = 175
+ else ifneq (,$(filter $(PLATFORM_FLAVOR),ls1028ardb))
+ $(call force,CFG_CAAM_LITTLE_ENDIAN,y)
+ $(call force,CFG_JR_INT,175)  # Default JR IT Number (142 + 32) = 175
++else ifneq (,$(filter $(PLATFORM_FLAVOR),mydjls1028))
++$(call force,CFG_CAAM_LITTLE_ENDIAN,y)
++$(call force,CFG_JR_INT,175)  # Default JR IT Number (142 + 32) = 175
+ else ifneq (,$(filter $(PLATFORM_FLAVOR),lx2160aqds))
+ $(call force,CFG_CAAM_LITTLE_ENDIAN,y)
+ $(call force,CFG_JR_INT, 174)
+diff --git a/core/arch/arm/plat-ls/platform_config.h b/core/arch/arm/plat-ls/platform_config.h
+index 4edce64d..8f431e24 100644
+--- a/core/arch/arm/plat-ls/platform_config.h
++++ b/core/arch/arm/plat-ls/platform_config.h
+@@ -119,6 +119,16 @@
+ #define CAAM_BASE   0x08000000
+ #endif
+ 
++#if defined(PLATFORM_FLAVOR_mydjls1028)
++/*  DUART 1 */
++#define UART0_BASE  0x021C0600
++#define GIC_BASE    0x06000000
++#define GICC_OFFSET 0x0
++#define GICD_OFFSET 0x0
++#define CAAM_BASE   0x08000000
++#endif
++
++
+ #if defined(PLATFORM_FLAVOR_lx2160ardb)
+ /*  DUART 1 */
+ #define UART0_BASE  0x021C0000
+-- 
+2.17.1
+

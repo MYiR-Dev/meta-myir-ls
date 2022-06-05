@@ -1,0 +1,66 @@
+From 4ae725f0089530d49e4a9e84c0e3cd2305b99b32 Mon Sep 17 00:00:00 2001
+From: wujl <1053924360@qq.com>
+Date: Mon, 3 Jan 2022 16:01:36 +0800
+Subject: [PATCH 2/2] FEAT:add mydj1028 config
+
+---
+ core/arch/arm/plat-ls/conf.mk           | 8 ++++++++
+ core/arch/arm/plat-ls/crypto_conf.mk    | 3 +++
+ core/arch/arm/plat-ls/platform_config.h | 8 ++++++++
+ 3 files changed, 19 insertions(+)
+
+diff --git a/core/arch/arm/plat-ls/conf.mk b/core/arch/arm/plat-ls/conf.mk
+index f6e1a631..f4787757 100644
+--- a/core/arch/arm/plat-ls/conf.mk
++++ b/core/arch/arm/plat-ls/conf.mk
+@@ -126,6 +126,14 @@ $(call force,CFG_ARM_GICV3,y)
+ CFG_SHMEM_SIZE ?= 0x00200000
+ endif
+ 
++ifeq ($(PLATFORM_FLAVOR),mydj1028)
++include core/arch/arm/cpu/cortex-armv8-0.mk
++$(call force,CFG_TEE_CORE_NB_CORE,2)
++$(call force,CFG_DRAM0_SIZE,0x80000000)
++$(call force,CFG_CORE_CLUSTER_SHIFT,1)
++$(call force,CFG_ARM_GICV3,y)
++CFG_SHMEM_SIZE ?= 0x00200000
++endif
+ 
+ ifeq ($(platform-flavor-armv8),1)
+ $(call force,CFG_WITH_ARM_TRUSTED_FW,y)
+diff --git a/core/arch/arm/plat-ls/crypto_conf.mk b/core/arch/arm/plat-ls/crypto_conf.mk
+index e1d5997c..dee9e8fa 100644
+--- a/core/arch/arm/plat-ls/crypto_conf.mk
++++ b/core/arch/arm/plat-ls/crypto_conf.mk
+@@ -66,6 +66,9 @@ $(call force,CFG_JR_INT,175)  # Default JR IT Number (142 + 32) = 175
+ else ifneq (,$(filter $(PLATFORM_FLAVOR),mydjls1028))
+ $(call force,CFG_CAAM_LITTLE_ENDIAN,y)
+ $(call force,CFG_JR_INT,175)  # Default JR IT Number (142 + 32) = 175
++else ifneq (,$(filter $(PLATFORM_FLAVOR),mydj1028))
++$(call force,CFG_CAAM_LITTLE_ENDIAN,y)
++$(call force,CFG_JR_INT,175)  # Default JR IT Number (142 + 32) = 175
+ else ifneq (,$(filter $(PLATFORM_FLAVOR),lx2160aqds))
+ $(call force,CFG_CAAM_LITTLE_ENDIAN,y)
+ $(call force,CFG_JR_INT, 174)
+diff --git a/core/arch/arm/plat-ls/platform_config.h b/core/arch/arm/plat-ls/platform_config.h
+index 8f431e24..4173e63a 100644
+--- a/core/arch/arm/plat-ls/platform_config.h
++++ b/core/arch/arm/plat-ls/platform_config.h
+@@ -128,6 +128,14 @@
+ #define CAAM_BASE   0x08000000
+ #endif
+ 
++#if defined(PLATFORM_FLAVOR_mydj1028)
++/*  DUART 1 */
++#define UART0_BASE  0x021C0600
++#define GIC_BASE    0x06000000
++#define GICC_OFFSET 0x0
++#define GICD_OFFSET 0x0
++#define CAAM_BASE   0x08000000
++#endif
+ 
+ #if defined(PLATFORM_FLAVOR_lx2160ardb)
+ /*  DUART 1 */
+-- 
+2.17.1
+

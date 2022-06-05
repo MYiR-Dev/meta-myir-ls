@@ -117,7 +117,7 @@ mksdcard(){
     node=$1
     echo $node
 
-    dd if=/dev/zero of=${node} bs=1k count=8192
+   # dd if=/dev/zero of=${node} bs=1k count=8192
 
 sfdisk --force ${node} <<EOF
     ${BOOT_ROM_SIZE}M,${KERNEL_DTB_SIZE}M,83
@@ -138,14 +138,14 @@ enable_bootpart(){
     mmc bootpart enable 1 1 /dev/mmcblk${PART}
 }
 burn_bootloader(){
-    echo 0 > /sys/block/mmcblk${PART}boot0/force_ro
+   # echo 0 > /sys/block/mmcblk${PART}boot0/force_ro
 
 	dd if=${RCW_FILE}  of=/dev/mmcblk${PART} bs=512 seek=8
 	dd if=${UBOOT_FILE} of=/dev/mmcblk${PART} bs=512 seek=2048
     cmd_check $? "burn uboot faild"
     sleep 1
 
-    echo 1 > /sys/block/mmcblk${PART}boot0/force_ro
+    #echo 1 > /sys/block/mmcblk${PART}boot0/force_ro
 }
 burn_kernel_dtb(){
 
@@ -209,7 +209,7 @@ echo_fun "start burn uboot "
 burn_bootloader
 #reszie2fs_mmc
 check_rootfs
-enable_bootpart
+#enable_bootpart
 burn_succeed
 
 if [ x"$HOSTNAME" == x"$MYS_NAME" ];then
