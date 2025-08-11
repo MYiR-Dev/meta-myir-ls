@@ -7,11 +7,11 @@ UBOOT_FILE=/home/root/mfgimage/fip_uboot.bin
 KERNEL_DTB_DIR=/home/root/mfgimage/kernel_dtb
 ROOTFS_FILE_EXT2=/home/root/mfgimage/rootfs-full.ext2
 
-MYD_J1028_NAME="mydjls1028"
+MYD_J1028_NAME="mydj1028"
 
 HOSTNAME=`cat /etc/hostname`
 
-if [ x"$HOSTNAME" == x"$MYD_J1028_NAME" ];then
+if [ x"$HOSTNAME" = x"$MYD_J1028_NAME" ];then
         led1=d22
 fi
 
@@ -20,12 +20,47 @@ time=0.2
 
 ECHO_TTY="/dev/ttyS0"
 
+
+mv /etc/udev/rules.d/automount.rules /etc/udev/rules.d/automount.rules.disabled
+udevadm control --reload-rules
+
+
+umount_mmc1()
+{
+	umount ${EMMC_NODE}*
+
+}
+
+burn_process()
+{
+    if [ -n ${led1} ];then
+    	echo timer > /sys/class/leds/${led1}/trigger
+    	echo 200 > /sys/class/leds/${led1}/delay_on
+    	echo 200 > /sys/class/leds/${led1}/delay_off
+    fi
+}
+
+burn_sucesss()
+{
+    if [ -n ${led1} ];then    
+    	echo timer > /sys/class/leds/${led1}/trigger
+    	echo 1 > /sys/class/leds/${led1}/delay_on
+    	echo 0 > /sys/class/leds/${led1}/delay_off
+    fi 
+}
+burn_fail()
+{
+    if [ -n ${led1} ];then 
+    	echo timer > /sys/class/leds/${led1}/trigger
+    	echo 0 > /sys/class/leds/${led1}/delay_on
+    	echo 1 > /sys/class/leds/${led1}/delay_off
+    fi
+}
+
+
 burn_start_ing(){
 
-
-        if [[ ${no_led} -eq 1 ]];then
-                exit 0;
-        fi
+    burn_process
 
     echo "***********************************************" >> ${ECHO_TTY}
     echo "*************    SYSTEM UPDATE    *************" >> ${ECHO_TTY}
@@ -38,21 +73,11 @@ burn_start_ing(){
     echo "                                               " >> ${ECHO_TTY}
     echo "                                               " >> ${ECHO_TTY}
 
-        #核心板上的绿灯闪烁则烧写中
-        echo 0 > /sys/class/leds/${led1}/brightness
-
-        while [ 1 ]
-        do
-                echo 1 > /sys/class/leds/${led1}/brightness
-                sleep $time
-                echo 0 > /sys/class/leds/${led1}/brightness
-                sleep $time
-        echo "*************   Updating   *************" >> ${ECHO_TTY}
-        done
 }
 
 burn_faild(){
         echo $'>>>[100]{\"step\":\"firmware\",\"result\":{\"bootloader\":\"2\",\"data\":\"2\",\"kernel\":\"2\",\"rootfs\":\"2\"}}\r\n'
+	burn_fail
         if [[ ${no_led} -eq 1 ]];then
                 exit 0;
         fi
@@ -68,6 +93,7 @@ burn_faild(){
 
 burn_succeed(){
   echo $'>>>[100]{\"step\":\"firmware\",\"result\":{\"bootloader\":\"0\",\"data\":\"0\",\"kernel\":\"0\",\"rootfs\":\"0\"}}\r\n'
+  burn_sucesss
   if [[ ${no_led} -eq 1 ]];then
                 return 0;
         fi
@@ -117,7 +143,7 @@ mksdcard(){
     node=$1
     echo $node
 
-   # dd if=/dev/zero of=${node} bs=1k count=8192
+    dd if=/dev/zero of=${node} bs=1k count=8192
 
 sfdisk --force ${node} <<EOF
     ${BOOT_ROM_SIZE}M,${KERNEL_DTB_SIZE}M,83
@@ -129,7 +155,7 @@ EOF
                 break
         else
                 sleep 0.5
-                echo ${node}p2 not exist
+                echo ${node}p2 not exist >> ${ECHO_TTY} 
         fi
     done
 }
@@ -151,7 +177,9 @@ burn_kernel_dtb(){
 
     umount /run/media/*
     umount /mnt/mmcblk${PART}p1/    
-    mkfs.ext4  /dev/mmcblk${PART}p1
+    mkfs.ext4  /dev/mmcblk${PART}p1 <<EOF
+y
+EOF
     mkdir -p /mnt/mmcblk${PART}p1
     mount  /dev/mmcblk${PART}p1 /mnt/mmcblk${PART}p1
     cp ${KERNEL_DTB_DIR}/* /mnt/mmcblk${PART}p1
@@ -195,8 +223,8 @@ check_rootfs(){
     umount /mnt/mmcblk${PART}p2/
 }
 
-burn_start_ing &
-LED_PID=$!
+burn_start_ing 
+#LED_PID=$!
 #sleep 1
 umount_mmc1
 echo_fun "start format mmc "
@@ -207,9 +235,9 @@ echo_fun "start burn rootfs "
 burn_rootfs_ext4
 echo_fun "start burn uboot "
 burn_bootloader
-#reszie2fs_mmc
+reszie2fs_mmc
 check_rootfs
-#enable_bootpart
+enable_bootpart
 burn_succeed
 
 if [ x"$HOSTNAME" == x"$MYS_NAME" ];then
